@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #002244;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  height: 80px;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  font-weight: 700;
+  margin-left: 100px;
+}
+
+.main-nav a {
+  margin-left: 2.7rem;
+  text-decoration: none;
+  color: #ddd;
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-right: 50px;
+}
+
+.main-nav a:hover {
+  color: #ffffff;
+  border-bottom: 2px solid #00aaff;
+}

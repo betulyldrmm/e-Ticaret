@@ -1,0 +1,334 @@
+.flash-products-container {
+  width: 100%;
+  background: linear-gradient(135deg, #002244,#002244, #002244);
+  padding: 24px;
+  border-radius: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.flash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.flash-title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.flash-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+}
+
+.flash-title h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.flash-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+}
+
+.timer-box {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 32px;
+  text-align: center;
+}
+
+.view-all-btn {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.view-all-btn:hover {
+  text-decoration: underline;
+}
+
+.carousel-container {
+  position: relative;
+}
+
+.carousel-overflow {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card-wrapper {
+  width: 25%;
+  flex-shrink: 0;
+  padding: 0 8px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.product-image-container {
+  position: relative;
+  height: 192px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-badges {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+}
+
+.badge-delivery {
+  background: #00157f;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-cargo {
+  background: #001182;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  background: white;
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+}
+
+.favorite-btn:hover {
+  background: #f9fafb;
+}
+
+.favorite-icon {
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
+}
+
+.favorite-icon.active {
+  color: #ef4444;
+  fill: currentColor;
+}
+
+.product-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 10;
+  background: #000f98;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.product-image-placeholder {
+  width: 128px;
+  height: 128px;
+  background: #d1d5db;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.product-info {
+  padding: 16px;
+}
+
+.product-brand {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.product-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.rating-score {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.rating-stars {
+  display: flex;
+  margin: 0 4px;
+}
+
+.star {
+  font-size: 12px;
+}
+
+.star.filled {
+  color: #fbbf24;
+}
+
+.star.empty {
+  color: #d1d5db;
+}
+
+.rating-count {
+  font-size: 12px;
+  color: #6b7280;
+  margin-left: 4px;
+}
+
+.product-price {
+  margin-bottom: 12px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.product-discounts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.discount-badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.discount-pink {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.discount-orange {
+  background: #fed7aa;
+  color: #ea580c;
+}
+
+.nav-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nav-arrow:hover {
+  background: #f9fafb;
+}
+
+.nav-arrow-icon {
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .product-card-wrapper {
+    width: 33.333%;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-card-wrapper {
+    width: 50%;
+  }
+  
+  .flash-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .flash-title-section {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card-wrapper {
+    width: 100%;
+  }
+  
+  .flash-products-container {
+    padding: 16px;
+  }
+}

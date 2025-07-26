@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { Search, ShoppingCart, Heart } from 'lucide-react';
 import './SearchCategories.css';
 
 const categories = [
@@ -12,9 +14,13 @@ const categories = [
   'Kitap & Kırtasiye',
   'Otomobil',
   'Gıda',
-  'Cocuk',
-  'Yedek Parça', 'Aksesuarlar', 'Yağ & Bakım', 'Lastik',
-   'Kadın Giyim', 'Erkek Giyim', 'Ayakkabılar', 'Aksesuarlar'
+  'Yedek Parça',
+  'Aksesuarlar',
+  'Yağ & Bakım',
+  'Lastik',
+  'Kadın Giyim',
+  'Erkek Giyim',
+  'Ayakkabılar'
 ];
 
 function SearchCategories() {
@@ -37,38 +43,69 @@ function SearchCategories() {
   };
 
   const handleClick = (category) => {
-   
-    alert(`${category} kategorisine gidiliyor!`); 
+    alert(`${category} kategorisine gidiliyor!`);
     setQuery('');
     setFiltered([]);
   };
 
+  const handleCartClick = () => {
+    alert('Sepetim açılıyor!');
+  };
+
+  const handleFavoritesClick = () => {
+    alert('Favorilerim açılıyor!');
+  };
+
   return (
-    <>
-    <div className="search-categories">
-      <input
-        type="text"
-        placeholder="Kategori ara..."
-        value={query}
-        onChange={handleChange}
-        className="search-input"
-      />
-      {filtered.length > 0 && (
-        <ul className="search-results">
-          {filtered.map((cat) => (
-            <li
-              key={cat}
-              onClick={() => handleClick(cat)}
-              className="search-result-item"
-            >
-              {cat}
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="header-container">
+      <div className="search-section">
+        <div className="search-categories">
+          <div className="search-input-container">
+            <Search className="search-icon" size={20} />
+            <input
+              type="text"
+              placeholder="Aradığınız ürün, kategori veya markayı yazınız"
+              value={query}
+              onChange={handleChange}
+              className="search-input"
+            />
+          </div>
+          {filtered.length > 0 && (
+            <ul className="search-results">
+              {filtered.map((cat) => (
+                <li
+                  key={cat}
+                  onClick={() => handleClick(cat)}
+                  className="search-result-item"
+                >
+                  <Search size={16} className="result-icon" />
+                  {cat}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        
+        <div className="action-buttons">
+          <button 
+            className="action-button favorites-btn"
+            onClick={handleFavoritesClick}
+          >
+            <Heart size={20} />
+            <span>Favorilerim</span>
+          </button>
+          
+          <button 
+            className="action-button cart-btn"
+            onClick={handleCartClick}
+          >
+            <ShoppingCart size={20} />
+            <span>Sepetim</span>
+            <span className="cart-badge">3</span>
+          </button>
+        </div>
+      </div>
     </div>
-  
-    </>
   );
 }
 

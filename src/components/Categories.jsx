@@ -1,55 +1,67 @@
 import React, { useState } from 'react';
 import './Categories.css';
+import {
+  FaTshirt,
+  FaMobileAlt,
+  FaChild,
+  FaBaby,
+  FaHome,
+  FaFootballBall,
+  FaSprayCan,
+  FaBook,
+  FaCar,
+  FaAppleAlt,
+} from 'react-icons/fa';
 
 const categories = [
   {
     name: 'MODA',
-    icon: '👗',
+    icon: <FaTshirt />,
     subCategories: ['Kadın Giyim', 'Erkek Giyim', 'Ayakkabılar', 'Aksesuarlar'],
   },
   {
     name: 'ELEKTRONİK',
-    icon: '📱',
+    icon: <FaMobileAlt />,
     subCategories: ['Telefonlar', 'Bilgisayarlar', 'Kamera', 'Ev Elektroniği'],
   },
   {
     name: 'ÇOCUK',
-    icon: '🧸',
+    icon: <FaChild />,
     subCategories: ['Oyuncaklar', 'Giyim', 'Kitaplar', 'Okul Malzemeleri'],
   },
   {
     name: 'BEBEK',
-    icon: '👶',
+    icon: <FaBaby />,
     subCategories: ['Bebek Bezi', 'Bebek Giyim', 'Mama & Beslenme', 'Oyun & Aktivite'],
   },
   {
     name: 'DEKORASYON',
-    icon: '🏠',
+    icon: <FaHome />,
     subCategories: ['Mobilya', 'Aydınlatma', 'Mutfak Gereçleri', 'Tekstil'],
   },
   {
     name: 'SPOR',
-    icon: '⚽',
+    icon: <FaFootballBall />,
     subCategories: ['Spor Giyim', 'Outdoor', 'Fitness Ekipmanları', 'Bisiklet'],
   },
   {
     name: 'KOZMETİK',
-    icon: '💄',
+    icon: <FaSprayCan />,
     subCategories: ['Makyaj', 'Cilt Bakımı', 'Saç Bakımı', 'Parfüm'],
   },
   {
     name: 'KİTAP',
-    icon: '📚',
+    icon: <FaBook />,
     subCategories: ['Roman', 'Eğitim', 'Defter & Kalem', 'Sanat Malzemeleri'],
   },
   {
     name: 'OTOMOBİL',
-    icon: '🚗',
+    icon: <FaCar />,
     subCategories: ['Yedek Parça', 'Aksesuarlar', 'Yağ & Bakım', 'Lastik'],
   },
   {
     name: 'GIDA',
-    icon: '🍎',
+    icon: <FaAppleAlt />,
     subCategories: ['Atıştırmalıklar', 'İçecekler', 'Organik Ürünler', 'Süt & Süt Ürünleri'],
   },
 ];
@@ -67,7 +79,7 @@ function Categories() {
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(null)}
           >
-            <div className='container'>
+            <div className="container">
               <div className="category-header">
                 <span className="category-icon">{cat.icon}</span>
                 <span className="category-name">{cat.name}</span>

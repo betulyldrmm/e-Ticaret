@@ -150,26 +150,14 @@ const Sale = () => {
 
   return (
     <div className="flashhh-products-container">
-      {/* Header */}
+     
       <div className="flashhh-header">
         <div className="flashhh-title-section">
           <div className="flashhh-title">
             <span style={{ fontSize: '24px' }}>⚡</span>
             <h2>Flaş Ürünler</h2>
           </div>
-          <div className="flashhh-timer">
-            <div className="timerrr-box">
-              {String(timeLeft.hours).padStart(2, '0')}
-            </div>
-            <span>:</span>
-            <div className="timerrr-box">
-              {String(timeLeft.minutes).padStart(2, '0')}
-            </div>
-            <span>:</span>
-            <div className="timerrr-box">
-              {String(timeLeft.seconds).padStart(2, '0')}
-            </div>
-          </div>
+          
         </div>
         <button className="vieww-all-btn">
           <span>Tüm Ürünler</span>

@@ -1,45 +1,46 @@
-.flash-products-container {
+.flashhh-products-container {
   width: 100%;
-  background: linear-gradient(135deg, #002244,#002244, #002244);
+  background: linear-gradient(135deg, #a61802);
   padding: 24px;
   border-radius: 12px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  height: 450px;
 }
 
-.flash-header {
+.flashhh-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
 }
 
-.flash-title-section {
+.flashhh-title-section {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.flash-title {
+.flashhh-title {
   display: flex;
   align-items: center;
   gap: 8px;
   color: white;
 }
 
-.flash-title h2 {
+.flashhh-title h2 {
   font-size: 20px;
   font-weight: bold;
   margin: 0;
 }
 
-.flash-timer {
+.flashhh-timer {
   display: flex;
   align-items: center;
   gap: 8px;
   color: white;
 }
 
-.timer-box {
+.timerr-box {
   background: rgba(255, 255, 255, 0.2);
   padding: 4px 8px;
   border-radius: 4px;
@@ -49,7 +50,7 @@
   text-align: center;
 }
 
-.view-all-btn {
+.vieww-all-btn {
   color: white;
   display: flex;
   align-items: center;
@@ -60,30 +61,30 @@
   text-decoration: none;
 }
 
-.view-all-btn:hover {
+.vieww-all-btn:hover {
   text-decoration: underline;
 }
 
-.carousel-container {
+.carouselll-container {
   position: relative;
 }
 
-.carousel-overflow {
+.carouselll-overflow {
   overflow: hidden;
 }
 
-.carousel-track {
+.carouselll-track {
   display: flex;
   transition: transform 0.3s ease-in-out;
 }
 
-.product-card-wrapper {
+.producttt-card-wrapper {
   width: 25%;
   flex-shrink: 0;
   padding: 0 8px;
 }
 
-.product-card {
+.producttt-card {
   background: white;
   border-radius: 8px;
   overflow: hidden;
@@ -91,7 +92,7 @@
   height: 100%;
 }
 
-.product-image-container {
+.producttt-image-container {
   position: relative;
   height: 192px;
   background: #f3f4f6;
@@ -100,14 +101,14 @@
   justify-content: center;
 }
 
-.product-badges {
+.producttt-badges {
   position: absolute;
   top: 8px;
   left: 8px;
   z-index: 10;
 }
 
-.badge-delivery {
+.badgeee-delivery {
   background: #00157f;
   color: white;
   font-size: 12px;
@@ -119,7 +120,7 @@
   gap: 4px;
 }
 
-.badge-cargo {
+.badgeee-cargo {
   background: #001182;
   color: white;
   font-size: 12px;
@@ -130,7 +131,7 @@
   gap: 4px;
 }
 
-.favorite-btn {
+.favoriteee-btn {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -143,22 +144,22 @@
   cursor: pointer;
 }
 
-.favorite-btn:hover {
+.favoriteee-btn:hover {
   background: #f9fafb;
 }
 
-.favorite-icon {
+.favoriteee-icon {
   width: 16px;
   height: 16px;
   color: #9ca3af;
 }
 
-.favorite-icon.active {
+.favoriteee-icon.active {
   color: #ef4444;
   fill: currentColor;
 }
 
-.product-badge {
+.producttt-badge {
   position: absolute;
   bottom: 8px;
   left: 8px;
@@ -170,7 +171,7 @@
   border-radius: 12px;
 }
 
-.product-image-placeholder {
+.producttt-image-placeholder {
   width: 128px;
   height: 128px;
   background: #d1d5db;
@@ -182,17 +183,17 @@
   font-size: 14px;
 }
 
-.product-info {
+.producttt-info {
   padding: 16px;
 }
 
-.product-brand {
+.producttt-brand {
   font-size: 14px;
   color: #6b7280;
   margin-bottom: 4px;
 }
 
-.product-title {
+.producttt-title {
   font-size: 14px;
   font-weight: 500;
   color: #1f2937;
@@ -203,59 +204,59 @@
   overflow: hidden;
 }
 
-.product-rating {
+.producttt-rating {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
 }
 
-.rating-score {
+.ratinggg-score {
   font-size: 14px;
   font-weight: 500;
   color: #1f2937;
 }
 
-.rating-stars {
+.ratinggg-stars {
   display: flex;
   margin: 0 4px;
 }
 
-.star {
+.starrr {
   font-size: 12px;
 }
 
-.star.filled {
+.starrr.filled {
   color: #fbbf24;
 }
 
-.star.empty {
+.starrr.empty {
   color: #d1d5db;
 }
 
-.rating-count {
+.ratinggg-count {
   font-size: 12px;
   color: #6b7280;
   margin-left: 4px;
 }
 
-.product-price {
+.producttt-price {
   margin-bottom: 12px;
 }
 
-.price {
+.priceee {
   font-size: 18px;
   font-weight: bold;
   color: #1f2937;
 }
 
-.product-discounts {
+.producttt-discounts {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.discount-badge {
+.discounttt-badge {
   font-size: 12px;
   padding: 4px 8px;
   border-radius: 4px;
@@ -264,12 +265,12 @@
   gap: 4px;
 }
 
-.discount-pink {
+.discounttt-pink {
   background: #fce7f3;
   color: #be185d;
 }
 
-.discount-orange {
+.discounttt-orange {
   background: #fed7aa;
   color: #ea580c;
 }

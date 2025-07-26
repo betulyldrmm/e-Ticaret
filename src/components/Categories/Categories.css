@@ -9,7 +9,7 @@
 }
 
 .category-navv {
-  background-color: #002244;
+  background-color:  #00458b;
   padding: 1rem 2rem;
   font-family: Arial, sans-serif;
   display: flex;
@@ -36,7 +36,7 @@
   font-weight: 600;
   user-select: none;
   transition: color 0.3s ease;
-  background-color: #002244;
+  background-color: #00458b;
 }
 
 .category-itemm:hover {
@@ -67,20 +67,20 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #004477;
+  background-color: #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   margin-top: 0.3rem;
   list-style: none;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  min-width: 160px;
+  min-width:200px;
   z-index: 10;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .subcategory-item {
   padding: 0.3rem 0;
-  color: #eee;
+  color: #000000;
   font-weight: 400;
   transition: color 0.2s ease;
   cursor: pointer;

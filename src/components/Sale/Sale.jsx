@@ -149,53 +149,53 @@ const Sale = () => {
   const [timeLeft] = useState({ hours: 2, minutes: 36, seconds: 32 });
 
   return (
-    <div className="flash-products-container">
+    <div className="flashhh-products-container">
       {/* Header */}
-      <div className="flash-header">
-        <div className="flash-title-section">
-          <div className="flash-title">
+      <div className="flashhh-header">
+        <div className="flashhh-title-section">
+          <div className="flashhh-title">
             <span style={{ fontSize: '24px' }}>⚡</span>
             <h2>Flaş Ürünler</h2>
           </div>
-          <div className="flash-timer">
-            <div className="timer-box">
+          <div className="flashhh-timer">
+            <div className="timerrr-box">
               {String(timeLeft.hours).padStart(2, '0')}
             </div>
             <span>:</span>
-            <div className="timer-box">
+            <div className="timerrr-box">
               {String(timeLeft.minutes).padStart(2, '0')}
             </div>
             <span>:</span>
-            <div className="timer-box">
+            <div className="timerrr-box">
               {String(timeLeft.seconds).padStart(2, '0')}
             </div>
           </div>
         </div>
-        <button className="view-all-btn">
+        <button className="vieww-all-btn">
           <span>Tüm Ürünler</span>
           <span>➤</span>
         </button>
       </div>
 
       {/* Carousel Container */}
-      <div className="carousel-container">
-        <div className="carousel-overflow">
+      <div className="carouselll-container">
+        <div className="carouselll-overflow">
           <div 
-            className="carousel-track"
+            className="carouselll-track"
             style={{ transform: `translateX(-${currentIndex * 25}%)` }}
           >
             {products.map((product) => (
-              <div key={product.id} className="product-card-wrapper">
-                <div className="product-card">
+              <div key={product.id} className="producttt-card-wrapper">
+                <div className="producttt-card">
                   {/* Product Image Container */}
-                  <div className="product-image-container">
+                  <div className="producttt-image-container">
                     {/* Badges */}
-                    <div className="product-badges">
-                      <div className="badge-delivery">
+                    <div className="producttt-badges">
+                      <div className="badgeee-delivery">
                         <span>🚚</span>
                         {product.tag}
                       </div>
-                      <div className="badge-cargo">
+                      <div className="badgeee-cargo">
                         <span>📦</span>
                         KARGO BEDAVA
                       </div>
@@ -204,59 +204,59 @@ const Sale = () => {
                     {/* Favorite Button */}
                     <button
                       onClick={() => toggleFavorite(product.id)}
-                      className="favorite-btn"
+                      className="favoriteee-btn"
                     >
-                      <span className={`favorite-icon ${favorites.has(product.id) ? 'active' : ''}`}>
+                      <span className={`favoriteee-icon ${favorites.has(product.id) ? 'active' : ''}`}>
                         {favorites.has(product.id) ? '❤️' : '🤍'}
                       </span>
                     </button>
                     
                     {/* Product Badge */}
-                    <div className="product-badge">
+                    <div className="producttt-badge">
                       {product.badge}
                     </div>
 
                     {/* Product Image Placeholder */}
-                    <div className="product-image-placeholder">
+                    <div className="producttt-image-placeholder">
                       {product.image}
                     </div>
                   </div>
 
                   {/* Product Info */}
-                  <div className="product-info">
-                    <div className="product-brand">{product.brand}</div>
-                    <h3 className="product-title">
+                  <div className="producttt-info">
+                    <div className="producttt-brand">{product.brand}</div>
+                    <h3 className="producttt-title">
                       {product.title}
                     </h3>
                     
                     {/* Rating */}
-                    <div className="product-rating">
-                      <span className="rating-score">{product.rating}</span>
-                      <div className="rating-stars">
+                    <div className="producttt-rating">
+                      <span className="ratinggg-score">{product.rating}</span>
+                      <div className="ratinggg-stars">
                         {[...Array(5)].map((_, i) => (
                           <span
                             key={i}
-                            className={`star ${i < Math.floor(product.rating) ? 'filled' : 'empty'}`}
+                            className={`starrr ${i < Math.floor(product.rating) ? 'filled' : 'empty'}`}
                           >
                             ★
                           </span>
                         ))}
                       </div>
-                      <span className="rating-count">({product.reviews})</span>
+                      <span className="ratinggg-count">({product.reviews})</span>
                     </div>
 
                     {/* Price */}
-                    <div className="product-price">
-                      <div className="price">{product.price} TL</div>
+                    <div className="producttt-price">
+                      <div className="priceee">{product.price} TL</div>
                     </div>
 
                     {/* Discount Badges */}
-                    <div className="product-discounts">
-                      <div className="discount-badge discount-pink">
+                    <div className="producttt-discounts">
+                      <div className="discounttt-badge discount-pink">
                         <span>📱</span>
                         {product.discount}
                       </div>
-                      <div className="discount-badge discount-orange">
+                      <div className="discounttt-badge discount-orange">
                         <span>⚡</span>
                         Çok Al Az Öde
                       </div>

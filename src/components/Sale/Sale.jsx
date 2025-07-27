@@ -5,7 +5,7 @@ const Sale = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState(new Set());
 
-  // 10 adet ürün verisi
+  // Ürün verileri
   const products = [
     {
       id: 1,
@@ -41,7 +41,7 @@ const Sale = () => {
       discount: "Kupon Fırsatı",
       tag: "AVANTAJLI ÜRÜN",
       badge: "SPREYLI KARAKLI YENİ SİSE",
-      image: "spor.jpg"
+     image: "kitap.jpg"
     },
     {
       id: 4,
@@ -89,7 +89,7 @@ const Sale = () => {
       discount: "15 TL Kupon",
       tag: "HIZLI TESLİMAT",
       badge: "EN ÇOK SATAN",
-      image: "spor.jpg"
+    image: "kitap.jpg"
     },
     {
       id: 8,
@@ -101,7 +101,7 @@ const Sale = () => {
       discount: "Çok Al Az Öde",
       tag: "HIZLI TESLİMAT",
       badge: "AVANTAJLI ÜRÜN",
-      image: "spor.jpg"
+      image: "kitap.jpg"
     },
     {
       id: 9,
@@ -125,7 +125,7 @@ const Sale = () => {
       discount: "15 TL Kupon",
       tag: "HIZLI TESLİMAT",
       badge: "AVANTAJLI ÜRÜN",
-      image: "spor.jpg"
+      image: "otomobil.jpg"
     }
   ];
 
@@ -145,19 +145,14 @@ const Sale = () => {
     }
   };
 
-  // Zaman sayacı (örnek değerler)
-  const [timeLeft] = useState({ hours: 2, minutes: 36, seconds: 32 });
-
   return (
     <div className="flashhh-products-container">
-     
       <div className="flashhh-header">
         <div className="flashhh-title-section">
           <div className="flashhh-title">
             <span style={{ fontSize: '24px' }}>⚡</span>
             <h2>Flaş Ürünler</h2>
           </div>
-          
         </div>
         <button className="vieww-all-btn">
           <span>Tüm Ürünler</span>
@@ -165,19 +160,16 @@ const Sale = () => {
         </button>
       </div>
 
-      {/* Carousel Container */}
       <div className="carouselll-container">
         <div className="carouselll-overflow">
-          <div 
+          <div
             className="carouselll-track"
             style={{ transform: `translateX(-${currentIndex * 25}%)` }}
           >
             {products.map((product) => (
               <div key={product.id} className="producttt-card-wrapper">
                 <div className="producttt-card">
-                  {/* Product Image Container */}
                   <div className="producttt-image-container">
-                    {/* Badges */}
                     <div className="producttt-badges">
                       <div className="badgeee-delivery">
                         <span>🚚</span>
@@ -188,8 +180,7 @@ const Sale = () => {
                         KARGO BEDAVA
                       </div>
                     </div>
-                    
-                    {/* Favorite Button */}
+
                     <button
                       onClick={() => toggleFavorite(product.id)}
                       className="favoriteee-btn"
@@ -198,26 +189,25 @@ const Sale = () => {
                         {favorites.has(product.id) ? '❤️' : '🤍'}
                       </span>
                     </button>
-                    
-                    {/* Product Badge */}
+
                     <div className="producttt-badge">
                       {product.badge}
                     </div>
 
-                    {/* Product Image Placeholder */}
+                    {/* ✅ Resim burada gösteriliyor */}
                     <div className="producttt-image-placeholder">
-                      {product.image}
+                      <img
+                        src={`/${product.image}`} // public klasöründen yükleniyor
+                        alt={product.title}
+                        className="producttt-image"
+                      />
                     </div>
                   </div>
 
-                  {/* Product Info */}
                   <div className="producttt-info">
                     <div className="producttt-brand">{product.brand}</div>
-                    <h3 className="producttt-title">
-                      {product.title}
-                    </h3>
-                    
-                    {/* Rating */}
+                    <h3 className="producttt-title">{product.title}</h3>
+
                     <div className="producttt-rating">
                       <span className="ratinggg-score">{product.rating}</span>
                       <div className="ratinggg-stars">
@@ -233,12 +223,10 @@ const Sale = () => {
                       <span className="ratinggg-count">({product.reviews})</span>
                     </div>
 
-                    {/* Price */}
                     <div className="producttt-price">
                       <div className="priceee">{product.price} TL</div>
                     </div>
 
-                    {/* Discount Badges */}
                     <div className="producttt-discounts">
                       <div className="discounttt-badge discount-pink">
                         <span>📱</span>
@@ -256,7 +244,6 @@ const Sale = () => {
           </div>
         </div>
 
-        
         {currentIndex < products.length - 4 && (
           <button
             onClick={nextSlide}

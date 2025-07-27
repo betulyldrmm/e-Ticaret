@@ -2,7 +2,7 @@
   max-width: 2000px;
   margin: 40px auto;
   padding: 0 20px;
-  background: linear-gradient(135deg, #00458b 0%,  #00458b 100%);
+ background-color: white;
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 10px 30px rgba(26, 35, 126, 0.1);
@@ -13,17 +13,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+ 
 }
 
 .section-title {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 700;
-  color: #1a237e;
+  color: #ffffff;
   margin: 0;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  background-color: #ffffff;
 }
 
 .navigation-buttons {
@@ -32,9 +33,9 @@
 }
 
 .nav-btn {
-  width: 50px;
+  width: 60px;
   height: 40px;
-  border: 2px solid #1a237e;
+  border: 3px solid #1a237e;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
   display: flex;
@@ -43,6 +44,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   color: #1a237e;
+   border-top: 2px solid blue;
+  
 }
 
 .nav-btn:hover:not(.disabled) {
@@ -58,10 +61,11 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   max-width: 100%;
   overflow: hidden;
+  
 }
 
 .product-card {
@@ -86,7 +90,7 @@
   left: 15px;
   padding: 4px 12px;
   border-radius: 20px;
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 600;
   color: white;
   z-index: 2;

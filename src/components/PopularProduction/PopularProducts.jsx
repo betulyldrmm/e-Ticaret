@@ -137,7 +137,7 @@ function PopularProducts() {
   return (
     <div className="popular-products-container">
       <div className="popular-products-header">
-        <h2 className="section-title">Popüler ürünlerden seçtik</h2>
+        <h2 className="section-title">POPÜLER ÜRÜNLER</h2>
         <div className="navigation-buttons">
           <button 
             className={`nav-btn prev-btn ${currentIndex === 0 ? 'disabled' : ''}`}

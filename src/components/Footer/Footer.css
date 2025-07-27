@@ -1,6 +1,6 @@
 .footer {
-  background-color: #00458b; /* Koyu mavi arka plan */
-  color: #fff;
+  background-color: #ffffff; /* Koyu mavi arka plan */
+  color: #000000;
   padding: 20px 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
@@ -25,7 +25,7 @@
 }
 
 .footer-link {
-  color: #cfd9e8; /* Açık mavi ton */
+  color: #070038; /* Açık mavi ton */
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
@@ -41,6 +41,6 @@
 
 .footer-copy {
   font-size: 25px;
-  color: #a0aec0; /* Daha açık ve hafif renk */
+  color: #000000; /* Daha açık ve hafif renk */
   text-align: center;
 }

@@ -9,7 +9,7 @@ function Header() {
       <nav className="main-nav">
       
        
-          <a href="#">GİRİŞ YAP/ÜYE OL</a>
+          <a href="/authForm">GİRİŞ YAP</a>
       </nav>
     </header>
   );

@@ -1,7 +1,7 @@
 .header-container {
-  background: #00458b;
+  background: #ffffff;
   padding: 20px 0;
-  box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+ 
 }
 
 .search-section {
@@ -11,6 +11,8 @@
   align-items: center;
   gap: 20px;
   padding: 0 20px;
+
+  
 }
 
 .search-categories {
@@ -23,6 +25,7 @@
   position: relative;
   display: flex;
   align-items: center;
+
 }
 
 .search-icon {
@@ -39,10 +42,11 @@
   border: 2px solid #3949ab;
   border-radius: 12px;
   outline: none;
-  box-shadow: 0 4px 15px rgba(26, 35, 126, 0.2);
+  box-shadow: 0 4px 15px rgba(93, 96, 131, 0.2);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+      height: 50px;
 }
 
 .search-input:focus {
@@ -53,7 +57,7 @@
 
 .search-input::placeholder {
   color: #666;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .search-results {
@@ -72,6 +76,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 50px;
 }
 
 .search-result-item {
@@ -116,7 +121,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(215, 0, 0, 0.3);
   border-radius: 12px;
   cursor: pointer;
   font-size: 14px;
@@ -125,11 +130,11 @@
   position: relative;
   backdrop-filter: blur(10px);
    width: 200px;
-   background-color: #000323;
+   background-color: #1916c9;
 }
 
 .favorites-btn {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 18, 120, 0.15);
   color: white;
   width: 200px;
   margin-left: 500px;
@@ -155,7 +160,7 @@
 }
 
 .cart-badge {
-  background: linear-gradient(135deg, #e91e63 0%, #f44336 100%);
+  background: linear-gradient(135deg, #bf0808 0%, #f44336 100%);
   color: white;
   font-size: 11px;
   font-weight: bold;

@@ -91,17 +91,17 @@ function SearchCategories() {
             className="action-button favorites-btn"
             onClick={handleFavoritesClick}
           >
-            <Heart size={20} />
-            <span>Favorilerim</span>
+            <Heart size={60} color='red'  />
+            <span className='action-button'>Favorilerim</span>
           </button>
           
           <button 
             className="action-button cart-btn"
             onClick={handleCartClick}
           >
-            <ShoppingCart size={20} />
-            <span>Sepetim</span>
-            <span className="cart-badge">3</span>
+            <ShoppingCart size={60} />
+            <span className='action-button'>Sepetim</span>
+          
           </button>
         </div>
       </div>

@@ -114,23 +114,24 @@
   display: flex;
   gap: 15px;
   align-items: center;
+  font-size: 25px;
 }
 
 .action-button {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
+  padding: 16px 20px;
   border: 2px solid rgba(215, 0, 0, 0.3);
   border-radius: 12px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 30px;
   font-weight: 600;
   transition: all 0.3s ease;
   position: relative;
   backdrop-filter: blur(10px);
-   width: 200px;
-   background-color: #1916c9;
+   width: 300px;
+   background-color: #02005e;
 }
 
 .favorites-btn {
@@ -138,6 +139,7 @@
   color: white;
   width: 200px;
   margin-left: 500px;
+  font-size: 25px;
 }
 
 .favorites-btn:hover {

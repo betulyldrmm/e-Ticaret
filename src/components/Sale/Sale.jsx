@@ -1,141 +1,60 @@
-import React, { useState } from 'react';
-import './Sale.css'; // CSS dosyasını import edin
+import React, { useState, useEffect } from 'react';
+import './Sale.css';
 
 const Sale = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState(new Set());
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Ürün verileri
-  const products = [
-    {
-      id: 1,
-      brand: "SportShop",
-      title: "Profesyonel Spor Ayakkabısı Yüksek Performans",
-      rating: 4.6,
-      reviews: 125,
-      price: "389.86",
-      discount: "15 TL Kupon",
-      tag: "HIZLI TESLİMAT",
-      badge: "AVANTAJLI ÜRÜN",
-      image: "spor.jpg"
-    },
-    {
-      id: 2,
-      brand: "FitGear",
-      title: "Spor Giyim Seti 3'lü Kombinasyon",
-      rating: 4.4,
-      reviews: 832,
-      price: "110.87",
-      discount: "Çok Al Az Öde",
-      tag: "HIZLI TESLİMAT",
-      badge: "EN ÇOK SATAN",
-      image: "spor.jpg"
-    },
-    {
-      id: 3,
-      brand: "HealthPlus",
-      title: "Spor Takviyesi Protein Tozu %100 Doğal",
-      rating: 4.6,
-      reviews: 967,
-      price: "191.90",
-      discount: "Kupon Fırsatı",
-      tag: "AVANTAJLI ÜRÜN",
-      badge: "SPREYLI KARAKLI YENİ SİSE",
-     image: "kitap.jpg"
-    },
-    {
-      id: 4,
-      brand: "ActiveLife",
-      title: "Spor Matı Yoga ve Pilates İçin",
-      rating: 4.3,
-      reviews: 164,
-      price: "269.00",
-      discount: "Çok Al Az Öde",
-      tag: "HIZLI TESLİMAT",
-      badge: "AVANTAJLI ÜRÜN",
-      image: "spor.jpg"
-    },
-    {
-      id: 5,
-      brand: "WestSport",
-      title: "Spor Çantası Su Geçirmez Tasarım",
-      rating: 4.4,
-      reviews: 439,
-      price: "49.90",
-      discount: "Kupon Fırsatı",
-      tag: "HIZLI TESLİMAT",
-      badge: "3. Ürün %15",
-      image: "spor.jpg"
-    },
-    {
-      id: 6,
-      brand: "PowerFit",
-      title: "Spor Eldiveni Antrenman İçin",
-      rating: 4.5,
-      reviews: 298,
-      price: "299.90",
-      discount: "Kupon Fırsatı",
-      tag: "HIZLI TESLİMAT",
-      badge: "AVANTAJLI ÜRÜN",
-      image: "spor.jpg"
-    },
-    {
-      id: 7,
-      brand: "FlexGym",
-      title: "Spor Bandajı Destek Sağlayıcı",
-      rating: 4.7,
-      reviews: 521,
-      price: "159.90",
-      discount: "15 TL Kupon",
-      tag: "HIZLI TESLİMAT",
-      badge: "EN ÇOK SATAN",
-    image: "kitap.jpg"
-    },
-    {
-      id: 8,
-      brand: "RunMax",
-      title: "Koşu Saati GPS Özellikli",
-      rating: 4.8,
-      reviews: 672,
-      price: "799.90",
-      discount: "Çok Al Az Öde",
-      tag: "HIZLI TESLİMAT",
-      badge: "AVANTAJLI ÜRÜN",
-      image: "kitap.jpg"
-    },
-    {
-      id: 9,
-      brand: "SportTech",
-      title: "Spor Kulaklığı Bluetooth",
-      rating: 4.5,
-      reviews: 384,
-      price: "189.90",
-      discount: "Kupon Fırsatı",
-      tag: "HIZLI TESLİMAT",
-      badge: "AVANTAJLI ÜRÜN",
-      image: "spor.jpg"
-    },
-    {
-      id: 10,
-      brand: "FitHome",
-      title: "Spor Aleti Ev Tipi Kompakt",
-      rating: 4.6,
-      reviews: 156,
-      price: "449.90",
-      discount: "15 TL Kupon",
-      tag: "HIZLI TESLİMAT",
-      badge: "AVANTAJLI ÜRÜN",
-      image: "otomobil.jpg"
-    }
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:5001/api/discounted-products');
+
+        if (!response.ok) {
+          throw new Error('İndirimli ürünler yüklenemedi');
+        }
+
+        const data = await response.json();
+        console.log('🔥 API\'den gelen indirimli ürünler:', data);
+
+        // BASIT HAL - PopularProducts gibi aynı mantık
+        const formattedProducts = data.map(product => {
+          console.log(`Ürün ${product.id} - Image URL: ${product.image_url}`);
+          
+          return {
+            id: product.id,
+            brand: product.name,
+            title: product.description || product.name,
+            rating: 4.5,
+            reviews: Math.floor(Math.random() * 1000) + 100,
+            price: product.price.toString(),
+            discount: `%${product.discount} indirim`,
+            tag: "HIZLI TESLİMAT",
+            badge: "İNDİRİMLİ ÜRÜN",
+            image_url: product.image_url || '/images/default-product.jpg' // PopularProducts ile aynı
+          };
+        });
+
+        console.log(`✅ ${formattedProducts.length} indirimli ürün formatlandı`);
+        setProducts(formattedProducts);
+      } catch (err) {
+        setError(err.message);
+        console.error('İndirimli ürünler yüklenirken hata:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const toggleFavorite = (productId) => {
     const newFavorites = new Set(favorites);
-    if (newFavorites.has(productId)) {
-      newFavorites.delete(productId);
-    } else {
-      newFavorites.add(productId);
-    }
+    newFavorites.has(productId) ? newFavorites.delete(productId) : newFavorites.add(productId);
     setFavorites(newFavorites);
   };
 
@@ -145,17 +64,48 @@ const Sale = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flashhh-products-container">
+        <div className="loading-container">
+          <p>İndirimli ürünler yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flashhh-products-container">
+        <div className="error-container">
+          <p>Hata: {error}</p>
+          <button onClick={() => window.location.reload()}>Tekrar Dene</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="flashhh-products-container">
+        <div className="no-products">
+          <p>Şu anda indirimli ürün bulunmuyor.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flashhh-products-container">
       <div className="flashhh-header">
         <div className="flashhh-title-section">
           <div className="flashhh-title">
-            <span style={{ fontSize: '24px' }}>⚡</span>
-            <h2>Flaş Ürünler</h2>
+            <span style={{ fontSize: '24px' }}>🔥</span>
+            <h2>İndirimli Ürünler ({products.length} ürün)</h2>
           </div>
         </div>
         <button className="vieww-all-btn">
-          <span>Tüm Ürünler</span>
+          <span>Tüm İndirimli Ürünler</span>
           <span>➤</span>
         </button>
       </div>
@@ -194,12 +144,20 @@ const Sale = () => {
                       {product.badge}
                     </div>
 
-                    {/* ✅ Resim burada gösteriliyor */}
                     <div className="producttt-image-placeholder">
+                      {/* PopularProducts ile aynı mantık kullan */}
                       <img
-                        src={`/${product.image}`} // public klasöründen yükleniyor
+                        src={product.image_url || '/images/default-product.jpg'}
                         alt={product.title}
                         className="producttt-image"
+                        onError={(e) => {
+                          console.error(`❌ Resim yüklenemedi: ${product.image_url}`);
+                          console.log('🔄 Default resme geçiliyor...');
+                          e.target.src = '/images/default-product.jpg';
+                        }}
+                        onLoad={() => {
+                          console.log(`✅ Resim başarıyla yüklendi: ${product.image_url}`);
+                        }}
                       />
                     </div>
                   </div>
@@ -229,7 +187,7 @@ const Sale = () => {
 
                     <div className="producttt-discounts">
                       <div className="discounttt-badge discount-pink">
-                        <span>📱</span>
+                        <span>🔥</span>
                         {product.discount}
                       </div>
                       <div className="discounttt-badge discount-orange">

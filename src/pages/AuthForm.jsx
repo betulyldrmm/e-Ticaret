@@ -170,7 +170,7 @@ function AuthForm() {
         addDebugLog(`🎉 Login başarılı: ${response.data.username}`);
          // ANASAYFAYA YÖNLENDİR
   setTimeout(() => {
-    window.location.href = '/';
+    window.location.href = '/home1';
   }, 1000);
 }
       

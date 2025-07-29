@@ -1,0 +1,43 @@
+.urun-detay-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.urun-bulunamadi {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.urun-bulunamadi h2 {
+  color: #dc2626;
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.geri-don-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #3b82f6;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.geri-don-btn:hover {
+  background: #2563eb;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  margin-bottom: 30px;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.breadcrumb a {
+  color: #3b82f6;
+}

@@ -1,110 +1,58 @@
-import React, { useState } from 'react';
-import { Heart, ShoppingCart, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Heart, ShoppingCart, Star, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import './PopularProducts.css';
 
-const popularProducts = [
-  {
-    id: 1,
-    image: 'spor.jpg',
-    title: 'Termo Piknik Çantası 15 Litre 35X20X20 cm',
-    rating: 4.8,
-    reviewCount: 248,
-    originalPrice: null,
-    currentPrice: 129.90,
-    discount: null,
-    installment: '2. Ürüne %5 indirim',
-    tag: null
-  },
-  {
-    id: 2,
-    image: 'spor.jpg',
-    title: 'Viscotex Visco Ortopedik Çocuk Yastığı (Sensitive Baby)',
-    rating: 4.7,
-    reviewCount: 327,
-    originalPrice: null,
-    currentPrice: 588.44,
-    discount: null,
-    installment: '2. Ürüne %5 indirim',
-    tag: 'Peşin fiyatına taksit'
-  },
-  {
-    id: 3,
-    image: 'spor.jpg',
-    title: 'Şifrli Boyama Kitabı Taşıtlar - Özel Sulu Kalem (Pedagog Onaylı)',
-    rating: 4.6,
-    reviewCount: 627,
-    originalPrice: null,
-    currentPrice: 149.90,
-    discount: null,
-    installment: null,
-    tag: null
-  },
-  {
-    id: 4,
-    image: 'spor.jpg',
-    title: 'Hellobaby Basic Erkek Yazı Baskılı Eşofman Takımı Erkek',
-    rating: 4.5,
-    reviewCount: 183,
-    originalPrice: null,
-    currentPrice: 349.99,
-    discount: null,
-    installment: null,
-    tag: 'Peşin fiyatına taksit'
-  },
-  {
-    id: 5,
-    image: 'spor.jpg',
-    title: 'Yumos Açık Hava Etkisi Mavi Gelincik Konsantre Yumuşatıcı',
-    rating: 4.8,
-    reviewCount: 1,
-    originalPrice: 299.90,
-    currentPrice: 169.90,
-    discount: 26,
-    installment: null,
-    tag: 'Kartsız 3 taksit'
-  },
-  {
-    id: 6,
-    image: 'spor.jpg',
-    title: 'Hypnôse Drama Anında Dolgunluk Ve Hacim Etkili Maskara',
-    rating: 4.3,
-    reviewCount: 118,
-    originalPrice: null,
-    currentPrice: 2400.00,
-    discount: null,
-    installment: 'Sepette 1.920,00 TL',
-    tag: null
-  },
-  {
-    id: 7,
-    image: 'spor.jpg',
-    title: 'Profesyonel Spor Ayakkabısı Yüksek Performans',
-    rating: 4.9,
-    reviewCount: 445,
-    originalPrice: 899.90,
-    currentPrice: 599.90,
-    discount: 33,
-    installment: '3 Taksit İmkanı',
-    tag: 'En Çok Satan'
-  },
-  {
-    id: 8,
-    image: 'spor.jpg',
-    title: 'Premium Bluetooth Kulaklık Gürültü Önleyici',
-    rating: 4.7,
-    reviewCount: 892,
-    originalPrice: 1299.90,
-    currentPrice: 799.90,
-    discount: 38,
-    installment: '6 Aya Varan Taksit',
-    tag: 'Kartsız 3 taksit'
-  }
-];
-
 function PopularProducts() {
+  const [popularProducts, setPopularProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState(new Set());
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const itemsPerPage = 6;
+  const navigate = useNavigate();
+
+  // ✅ Backend'den popüler ürünleri çek
+  useEffect(() => {
+    const fetchPopularProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:5001/api/popular-products');
+        
+        if (!response.ok) {
+          throw new Error('Popüler ürünler alınamadı');
+        }
+        
+        const data = await response.json();
+        console.log('Popüler ürünler:', data);
+        setPopularProducts(data);
+        setError(null);
+      } catch (error) {
+        console.error('Popüler ürünler alınamadı:', error);
+        setError(error.message);
+        // Hata durumunda normal ürünleri göster
+        fetchAllProducts();
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Eğer popüler ürün yoksa tüm ürünleri göster
+    const fetchAllProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          // İlk 10 ürünü popüler olarak göster
+          setPopularProducts(data.slice(0, 10));
+        }
+      } catch (error) {
+        console.error('Ürünler alınamadı:', error);
+      }
+    };
+
+    fetchPopularProducts();
+  }, []);
 
   const toggleFavorite = (productId) => {
     const newFavorites = new Set(favorites);
@@ -114,10 +62,23 @@ function PopularProducts() {
       newFavorites.add(productId);
     }
     setFavorites(newFavorites);
+    
+    // LocalStorage'a kaydet (opsiyonel)
+    localStorage.setItem('favorites', JSON.stringify([...newFavorites]));
   };
 
-  const addToCart = (product) => {
-    alert(`${product.title} sepete eklendi!`);
+  // Sepete ekle - Auth sayfasına yönlendir
+  const addToCart = (product, e) => {
+    e.preventDefault(); // Link'in çalışmasını engelle
+    e.stopPropagation(); // Event bubbling'i durdur
+    
+    // Auth sayfasına yönlendir
+    navigate('/auth', { 
+      state: { 
+        message: `${product.name} ürününü satın almak için giriş yapmalısınız.`,
+        product: product 
+      } 
+    });
   };
 
   const nextSlide = () => {
@@ -132,7 +93,37 @@ function PopularProducts() {
     }
   };
 
+  // Favorileri localStorage'dan yükle
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+      setFavorites(new Set(JSON.parse(savedFavorites)));
+    }
+  }, []);
+
   const visibleProducts = popularProducts.slice(currentIndex, currentIndex + itemsPerPage);
+
+  if (loading) {
+    return (
+      <div className="popular-products-container">
+        <div className="loading-state">
+          <div className="loading-spinner"></div>
+          <p>Popüler ürünler yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error && popularProducts.length === 0) {
+    return (
+      <div className="popular-products-container">
+        <div className="error-state">
+          <p>Popüler ürünler yüklenirken bir hata oluştu.</p>
+          <button onClick={() => window.location.reload()}>Tekrar Dene</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="popular-products-container">
@@ -156,76 +147,108 @@ function PopularProducts() {
         </div>
       </div>
 
-      <div className="products-grid">
-        {visibleProducts.map((product) => (
-          <div key={product.id} className="product-card">
-            {product.tag && (
-              <div className={`product-tag ${product.tag.includes('Peşin') ? 'installment-tag' : 
-                                              product.tag.includes('Kartsız') ? 'no-card-tag' : 
-                                              product.tag.includes('En Çok') ? 'bestseller-tag' : 'default-tag'}`}>
-                {product.tag}
-              </div>
-            )}
-            
-            <div className="product-image-container">
-              <img 
-                src={product.image} 
-                alt={product.title}
-                className="product-image"
-              />
-              <button 
-                className={`favorite-btn ${favorites.has(product.id) ? 'active' : ''}`}
-                onClick={() => toggleFavorite(product.id)}
-              >
-                <Heart size={18} fill={favorites.has(product.id) ? '#ff4757' : 'none'} />
-              </button>
-            </div>
-
-            <div className="product-info">
-              <h3 className="product-title">{product.title}</h3>
-              
-              <div className="rating-container">
-                <div className="stars">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      size={12} 
-                      fill={i < Math.floor(product.rating) ? '#ffa500' : 'none'}
-                      color="#ffa500"
-                    />
-                  ))}
-                  <span className="rating-text">{product.rating}</span>
-                </div>
-                <span className="review-count">({product.reviewCount})</span>
-              </div>
-
-              <div className="price-container">
-                {product.originalPrice && (
-                  <span className="original-price">{product.originalPrice} TL</span>
+      {popularProducts.length === 0 ? (
+        <div className="no-products">
+          <p>Henüz popüler ürün bulunmuyor.</p>
+        </div>
+      ) : (
+        <div className="products-grid">
+          {visibleProducts.map((product) => (
+            <Link 
+              key={product.id} 
+              to={`/urun/${product.id}`} 
+              className="product-card-link"
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <div className="product-card">
+                {/* Özel etiketler */}
+                {product.rank <= 3 && (
+                  <div className="product-tag bestseller-tag">
+                    En Popüler #{product.rank}
+                  </div>
                 )}
-                <span className="current-price">{product.currentPrice} TL</span>
-                {product.discount && (
-                  <span className="discount-badge">%{product.discount}</span>
-                )}
-              </div>
+                
+                <div className="product-image-container">
+                  <img 
+                    src={product.image_url || `/images/default-product.jpg`}
+                    alt={product.name}
+                    className="product-image"
+                    onError={(e) => {
+                      e.target.src = '/images/default-product.jpg';
+                    }}
+                  />
+                  
+                  {/* Detay sayfasına git butonu */}
+                  <div className="product-overlay">
+                    <button className="quick-view-btn">
+                      <Eye size={18} />
+                      Detayları Gör
+                    </button>
+                  </div>
 
-              {product.installment && (
-                <div className="installment-info">
-                  {product.installment}
+                  <button 
+                    className={`favorite-btn ${favorites.has(product.id) ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleFavorite(product.id);
+                    }}
+                  >
+                    <Heart size={18} fill={favorites.has(product.id) ? '#ff4757' : 'none'} />
+                  </button>
                 </div>
-              )}
 
-              <button 
-                className="add-to-cart-btn"
-                onClick={() => addToCart(product)}
-              >
-                <ShoppingCart size={16} />
-                Sepete Ekle
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+                <div className="product-info">
+                  <h3 className="product-title">{product.name}</h3>
+                  
+                  {/* Kategori bilgisi */}
+                  {product.category_name && (
+                    <p className="product-category">{product.category_name}</p>
+                  )}
+                  
+                  {/* Rating (şimdilik sabit değerler, sonra dinamik yapılabilir) */}
+                  <div className="rating-container">
+                    <div className="stars">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          size={12} 
+                          fill={i < 4 ? '#ffa500' : 'none'} // Şimdilik 4 yıldız
+                          color="#ffa500"
+                        />
+                      ))}
+                      <span className="rating-text">4.0</span>
+                    </div>
+                    <span className="review-count">(128)</span>
+                  </div>
+
+                  <div className="price-container">
+                    <span className="current-price">{product.price} TL</span>
+                  </div>
+
+                  {/* Stok durumu */}
+                  <div className="stock-info">
+                    {product.stock > 0 ? (
+                      <span className="in-stock">Stokta ({product.stock} adet)</span>
+                    ) : (
+                      <span className="out-of-stock">Stokta Yok</span>
+                    )}
+                  </div>
+
+                  <button 
+                    className={`add-to-cart-btn ${product.stock === 0 ? 'disabled' : ''}`}
+                    onClick={(e) => addToCart(product, e)}
+                    disabled={product.stock === 0}
+                  >
+                    <ShoppingCart size={16} />
+                    {product.stock > 0 ? 'Sepete Ekle' : 'Stokta Yok'}
+                  </button>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

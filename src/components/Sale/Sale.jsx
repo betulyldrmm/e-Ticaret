@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Sale.css';
 
 const Sale = () => {
@@ -7,6 +8,7 @@ const Sale = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,7 +37,7 @@ const Sale = () => {
             discount: `%${product.discount} indirim`,
             tag: "HIZLI TESLİMAT",
             badge: "İNDİRİMLİ ÜRÜN",
-            image_url: product.image_url || '/images/default-product.jpg' // PopularProducts ile aynı
+            image_url: product.image_url || '/images/default-product.jpg'
           };
         });
 
@@ -52,15 +54,44 @@ const Sale = () => {
     fetchProducts();
   }, []);
 
-  const toggleFavorite = (productId) => {
-    const newFavorites = new Set(favorites);
-    newFavorites.has(productId) ? newFavorites.delete(productId) : newFavorites.add(productId);
-    setFavorites(newFavorites);
+  // Favori durumunu localStorage'dan yükle
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+      setFavorites(new Set(JSON.parse(savedFavorites)));
+    }
+  }, []);
+
+  const toggleFavorite = (productId, e) => {
+    e.stopPropagation(); // Ürün kartına tıklamayı engelle
+    
+    const savedFavorites = localStorage.getItem('favorites');
+    const currentFavorites = savedFavorites ? new Set(JSON.parse(savedFavorites)) : new Set();
+    
+    if (currentFavorites.has(productId)) {
+      currentFavorites.delete(productId);
+    } else {
+      currentFavorites.add(productId);
+    }
+    
+    localStorage.setItem('favorites', JSON.stringify([...currentFavorites]));
+    setFavorites(new Set(currentFavorites));
+  };
+
+  const handleProductClick = (productId) => {
+    console.log(`🔗 Ürün detayına yönlendiriliyor: ${productId}`);
+    navigate(`/urun/${productId}`);
   };
 
   const nextSlide = () => {
     if (currentIndex < products.length - 4) {
       setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
@@ -104,13 +135,26 @@ const Sale = () => {
             <h2>İndirimli Ürünler ({products.length} ürün)</h2>
           </div>
         </div>
-        <button className="vieww-all-btn">
+        <button 
+          className="vieww-all-btn"
+          onClick={() => navigate('/indirimli-urunler')}
+        >
           <span>Tüm İndirimli Ürünler</span>
           <span>➤</span>
         </button>
       </div>
 
       <div className="carouselll-container">
+        {/* Sol ok */}
+        {currentIndex > 0 && (
+          <button
+            onClick={prevSlide}
+            className="nav-arrow nav-arrow-left"
+          >
+            <span className="nav-arrow-icon">◀</span>
+          </button>
+        )}
+
         <div className="carouselll-overflow">
           <div
             className="carouselll-track"
@@ -118,7 +162,11 @@ const Sale = () => {
           >
             {products.map((product) => (
               <div key={product.id} className="producttt-card-wrapper">
-                <div className="producttt-card">
+                <div 
+                  className="producttt-card"
+                  onClick={() => handleProductClick(product.id)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <div className="producttt-image-container">
                     <div className="producttt-badges">
                       <div className="badgeee-delivery">
@@ -132,7 +180,7 @@ const Sale = () => {
                     </div>
 
                     <button
-                      onClick={() => toggleFavorite(product.id)}
+                      onClick={(e) => toggleFavorite(product.id, e)}
                       className="favoriteee-btn"
                     >
                       <span className={`favoriteee-icon ${favorites.has(product.id) ? 'active' : ''}`}>
@@ -145,7 +193,6 @@ const Sale = () => {
                     </div>
 
                     <div className="producttt-image-placeholder">
-                      {/* PopularProducts ile aynı mantık kullan */}
                       <img
                         src={product.image_url || '/images/default-product.jpg'}
                         alt={product.title}
@@ -196,16 +243,22 @@ const Sale = () => {
                       </div>
                     </div>
                   </div>
+
+                  {/* Hover efekti için overlay */}
+                  <div className="producttt-hover-overlay">
+                    
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Sağ ok */}
         {currentIndex < products.length - 4 && (
           <button
             onClick={nextSlide}
-            className="nav-arrow"
+            className="nav-arrow nav-arrow-right"
           >
             <span className="nav-arrow-icon">➤</span>
           </button>

@@ -8,7 +8,7 @@
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: 1900px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -27,7 +27,7 @@
 
 .footer-title {
   color: #1e40af;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 700;
   margin-bottom: 20px;
   padding-bottom: 8px;
@@ -55,7 +55,7 @@
   color: #475569;
   text-decoration: none;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 20px;
   transition: all 0.3s ease;
   padding: 4px 0;
   position: relative;
@@ -125,7 +125,7 @@
 .platform-name {
   color: #1e40af;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 /* Sosyal Medya */

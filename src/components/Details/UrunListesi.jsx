@@ -107,11 +107,11 @@ const UrunListesi = () => {
             <Link to={`/urun/${urun.id}`} className="urun-link">
               <div className="urun-resim-container">
                 <img
-                  src={urun.image_url || 'https://via.placeholder.com/300x300?text=Ürün+Resmi'}
+                  src={urun.image_url || 'spor.jpg'}
                   alt={urun.name}
                   className="urun-resim"
                   onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/300x300?text=Ürün+Resmi';
+                    e.target.src = 'spor.jpg';
                   }}
                 />
                 

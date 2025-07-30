@@ -7,6 +7,7 @@ import PopularProducts from '../components/PopularProduction/PopularProducts';
 import Brand from '../components/Brand/Brand';
 import Product from '../components/Product/Product';
 import Footer from '../components/Footer/Footer';
+import GiftCategories from '../components/giftCategories/GiftCategories';
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
       <Header />
       <Categories />
       <SearchCategories></SearchCategories>  <br></br><br></br>
+      <GiftCategories></GiftCategories>
       <Product></Product><br></br><br></br>
  <Sale></Sale>
     <PopularProducts></PopularProducts>

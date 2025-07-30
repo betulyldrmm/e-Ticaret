@@ -12,6 +12,50 @@ function PopularProducts() {
   const itemsPerPage = 6;
   const navigate = useNavigate();
 
+  // Ürün adına göre resim belirleme fonksiyonu
+  const getProductImage = (product) => {
+    if (product.image_url && !product.image_url.includes('via.placeholder.com')) {
+      return product.image_url;
+    }
+    
+    const productName = product.name?.toLowerCase();
+    if (productName?.includes('masa')) return '/images/masa.jpg';
+    if (productName?.includes('laptop') || productName?.includes('bilgisayar')) return '/images/laptop.jpg';
+    if (productName?.includes('telefon')) return '/images/telefon.jpg';
+    if (productName?.includes('kitap')) return '/images/kitap.jpg';
+    if (productName?.includes('spor')) return '/images/spor.jpg';
+    if (productName?.includes('ayakkabı')) return '/images/ayakkabi.jpg';
+    if (productName?.includes('çanta')) return '/images/canta.jpg';
+    if (productName?.includes('saat')) return '/images/saat.jpg';
+    
+    return '/images/default-product.jpg';
+  };
+
+  // Resim hata durumunda çalışacak fonksiyon
+  const handleImageError = (e, product) => {
+    const img = e.target;
+    const productName = product.name?.toLowerCase();
+    
+    if (!img.src.includes('default-product.jpg')) {
+      if (productName?.includes('masa')) {
+        img.src = '/masa.jpg';
+      } else if (productName?.includes('laptop') || productName?.includes('bilgisayar')) {
+        img.src = '/laptop.jpg';
+      } else if (productName?.includes('telefon')) {
+        img.src = '/telefon.jpg';
+      } else if (productName?.includes('kitap')) {
+        img.src = '/kitap.jpg';
+      } else if (productName?.includes('spor')) {
+        img.src = '/spor.jpg';
+      } else {
+        img.src = '/images/default-product.jpg';
+      }
+    } else {
+      // Son çare olarak rastgele placeholder
+      img.src = `https://picsum.photos/400/400?random=${product.id}`;
+    }
+  };
+
   // ✅ Backend'den popüler ürünleri çek
   useEffect(() => {
     const fetchPopularProducts = async () => {
@@ -73,7 +117,7 @@ function PopularProducts() {
     e.stopPropagation(); // Event bubbling'i durdur
     
     // Auth sayfasına yönlendir
-    navigate('/auth', { 
+    navigate('/authForm', { 
       state: { 
         message: `${product.name} ürününü satın almak için giriş yapmalısınız.`,
         product: product 
@@ -168,22 +212,24 @@ function PopularProducts() {
                   </div>
                 )}
                 
+                {/* İndirim etiketi */}
+                {product.discount > 0 && (
+                  <div className="product-tag discount-tag">
+                    %{product.discount} İndirim
+                  </div>
+                )}
+                
                 <div className="product-image-container">
                   <img 
-                    src={product.image_url || `/images/default-product.jpg`}
+                    src={getProductImage(product)}
                     alt={product.name}
                     className="product-image"
-                    onError={(e) => {
-                      e.target.src = '/images/default-product.jpg';
-                    }}
+                    onError={(e) => handleImageError(e, product)}
                   />
                   
                   {/* Detay sayfasına git butonu */}
                   <div className="product-overlay">
-                    <button className="quick-view-btn">
-                      <Eye size={18} />
-                      Detayları Gör
-                    </button>
+                   
                   </div>
 
                   <button 
@@ -206,6 +252,16 @@ function PopularProducts() {
                     <p className="product-category">{product.category_name}</p>
                   )}
                   
+                  {/* Açıklama (kısa) */}
+                  {product.description && (
+                    <p className="product-description">
+                      {product.description.length > 60 
+                        ? `${product.description.substring(0, 60)}...` 
+                        : product.description
+                      }
+                    </p>
+                  )}
+                  
                   {/* Rating (şimdilik sabit değerler, sonra dinamik yapılabilir) */}
                   <div className="rating-container">
                     <div className="stars">
@@ -223,15 +279,24 @@ function PopularProducts() {
                   </div>
 
                   <div className="price-container">
+                    {/* İndirimli fiyat hesaplaması */}
+                    {product.discount > 0 && (
+                      <span className="old-price">
+                        {(product.price / (1 - product.discount / 100)).toFixed(2)} TL
+                      </span>
+                    )}
                     <span className="current-price">{product.price} TL</span>
                   </div>
 
                   {/* Stok durumu */}
                   <div className="stock-info">
                     {product.stock > 0 ? (
-                      <span className="in-stock">Stokta ({product.stock} adet)</span>
+                      <span className="in-stock">
+                        ✓ Stokta ({product.stock} adet)
+                        {product.stock < 5 && <span className="low-stock"> - Son {product.stock} adet!</span>}
+                      </span>
                     ) : (
-                      <span className="out-of-stock">Stokta Yok</span>
+                      <span className="out-of-stock">✗ Stokta Yok</span>
                     )}
                   </div>
 
@@ -247,6 +312,15 @@ function PopularProducts() {
               </div>
             </Link>
           ))}
+        </div>
+      )}
+
+      {/* Sayfa göstergesi */}
+      {popularProducts.length > itemsPerPage && (
+        <div className="pagination-info">
+          <span>
+            {currentIndex + 1}-{Math.min(currentIndex + itemsPerPage, popularProducts.length)} / {popularProducts.length} ürün
+          </span>
         </div>
       )}
     </div>
